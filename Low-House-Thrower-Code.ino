@@ -1,5 +1,6 @@
-const int buttonPin = 8;     
-const int ledPin =  10;
+const int buttonPin = 2;     
+const int ledPin =  9;
+const int pwrPin = 8;
 const int dip1 = 4;
 const int dip2 = 5;
 const int dip3 = 6;
@@ -16,12 +17,16 @@ int holdtime = 0;
  
 void setup() {
   pinMode(ledPin, OUTPUT);
+  pinMode(pwrPin, OUTPUT);
   pinMode(relay1, OUTPUT);
   pinMode(buttonPin, INPUT);
   pinMode(dip1, INPUT_PULLUP);
   pinMode(dip2, INPUT_PULLUP);
   pinMode(dip3, INPUT_PULLUP);
   pinMode(dip4, INPUT_PULLUP);
+  digitalWrite(pwrPin, HIGH);
+ 
+  digitalWrite(buttonPin, HIGH);
   
 }
  
@@ -56,7 +61,7 @@ void loop() {
   }
 
   
-  if (buttonState == HIGH) {
+  if (digitalRead(buttonPin)==LOW) {
     digitalWrite(ledPin, HIGH);
     digitalWrite(relay1, HIGH);
     delay(holdtime);
